@@ -1,6 +1,10 @@
 <script setup>
 import srpc from '../utils/srpc.js'
 import { sendIn, setListener } from '../utils/iframe.js'
+import state from '../state.js'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+if (!state.user?.token) router.push('/')
 srpc('https://a.aauth.link/aichat')
 
 let iframe = $ref(), loading = $ref(false)
@@ -15,12 +19,15 @@ setListener(async msg => {
   if (msg.response) {
     msgs.push({ role: 'user', content: msg.response })
     loading = true
-    const res = await srpc.chat(msgs)
+    const res = await srpc.chat(state.user?.token, msgs)
     loading = false
+    if (res.err) return Swal.fire('Error', res.err, 'error')
     const m = res.choices[0].message
     m.content = m.content.trim()
     msgs.push(m)
     sendIn({ message: m.content }, iframe)
+    state.token = res.usage.left_tokens
+    if (typeof state.token !== 'number') state.token = Infinity
   }
 })
 </script>
