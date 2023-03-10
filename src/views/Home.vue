@@ -1,6 +1,7 @@
 <script setup>
 import srpc from '../utils/srpc.js'
 import state from '../state.js'
+import { IdentificationIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -10,6 +11,7 @@ if (state.user?.token) init()
 else router.push('/')
 
 async function init () {
+  state.token = 'Loading...'
   state.token = await srpc.token(state.user?.token)
   if (typeof state.token !== 'number') state.token = Infinity
 }
@@ -34,11 +36,13 @@ function showID () {
 <template>
   <div class="w-full min-h-screen p-4 sm:p-10 bg-gray-100">
     <h1 class="font-bold text-3xl">你好，{{ state.user?.name || '' }}</h1>
-    <p class="my-1 text-gray-500">欢迎来到信息学堂！（此页面建设中）</p>
-    <p>剩余点数：<code>{{ state.token }}</code></p>
-    <button class="m-2 bg-gray-300" @click="showID">我的ID</button>
-    <button class="m-2 bg-gray-300" @click="goto('/chat')">AI助教</button>
-    <button class="m-2 bg-gray-300" @click="goto('/code-check')">代码检查</button>
+    <p class="my-1 text-gray-500">欢迎来到信息学堂！您的点数剩余：<code>{{ state.token }}</code></p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 md:bg-cols-4 lg:grid-cols-5 my-4">
+      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="showID"><IdentificationIcon class="w-8 mr-2" />我的ID</button>
+      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="goto('/chat')"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
+      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="goto('/code-check')"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
+    </div>
+    
   </div>
   
 </template>
