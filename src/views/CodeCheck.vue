@@ -21,7 +21,7 @@ function checkReady () {
 async function analyze () {
   if (!ready || loading) return
   loading = true
-  const msgs = [{ role: 'system', content: 'Check errors without explanation' + (lang ? ' in Chinese' : '') }, { role: 'user', content: input.textContent }]
+  const msgs = [{ role: 'system', content: 'find errors without code or explanation' + (lang ? ' in Chinese' : '') }, { role: 'user', content: input.textContent }]
   const res = await srpc.chat(state.user?.token, msgs)
   loading = false
   if (res.err) return Swal.fire('Error', res.err, 'error')
