@@ -1,7 +1,7 @@
 <script setup>
 import srpc from '../utils/srpc.js'
 import state from '../state.js'
-import { IdentificationIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
+import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -21,6 +21,10 @@ function goto (p) {
   router.push(p)
 }
 
+function slide () {
+  window.open('https://s.yzzx.org/slide/#/view/xxxt?name=' + state.user?.name)
+}
+
 function showID () {
   Swal.fire({
     showConfirmButton: false,
@@ -38,11 +42,17 @@ function showID () {
     <h1 class="font-bold text-3xl">你好，{{ state.user?.name || '' }}</h1>
     <p class="my-1 text-gray-500">欢迎来到信息学堂！您的点数剩余：<code>{{ state.token }}</code></p>
     <div class="grid grid-cols-1 sm:grid-cols-3 md:bg-cols-4 lg:grid-cols-5 my-4">
-      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="showID"><IdentificationIcon class="w-8 mr-2" />我的ID</button>
-      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="goto('/chat')"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
-      <button class="m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700" @click="goto('/code-check')"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
+      <button @click="showID"><IdentificationIcon class="w-8 mr-2" />我的ID</button>
+      <button @click="slide"><TvIcon class="w-8 mr-2" />课堂课件</button>
+      <button @click="goto('/chat')"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
+      <button @click="goto('/code-check')"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
     </div>
-    
   </div>
-  
 </template>
+
+<style scoped>
+.grid button {
+  transition: all 0.3s ease;
+  @apply m-2 p-4 bg-gray-200 flex items-center font-bold text-gray-700 rounded hover:bg-gray-300;
+}
+</style>
