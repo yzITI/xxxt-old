@@ -1,7 +1,7 @@
 <script setup>
 import srpc from '../utils/srpc.js'
 import state from '../state.js'
-import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
+import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon, QrCodeIcon, AdjustmentsHorizontalIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -16,8 +16,8 @@ async function init () {
   if (typeof state.token !== 'number') state.token = Infinity
 }
 
-function goto (p) {
-  if (state.token < 1) return Swal.fire('点数不足', '请联系管理员获得点数', 'error')
+function goto (p, requireToken = false) {
+  if (requireToken && state.token < 1) return Swal.fire('点数不足', '请联系管理员获得点数', 'error')
   router.push(p)
 }
 
@@ -44,8 +44,10 @@ function showID () {
     <div class="grid grid-cols-1 sm:grid-cols-3 md:bg-cols-4 lg:grid-cols-5 my-4">
       <button @click="showID"><IdentificationIcon class="w-8 mr-2" />我的ID</button>
       <button @click="slide"><TvIcon class="w-8 mr-2" />课堂课件</button>
-      <button @click="goto('/chat')"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
-      <button @click="goto('/code-check')"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
+      <button @click="goto('/chat', true)"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
+      <button @click="goto('/code-check', true)"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
+      <button v-if="state.token > 100e3" @click="goto('/scan')"><QrCodeIcon class="w-8 mr-2" />扫一扫</button>
+      <button v-if="state.token > 100e3" @click="goto('/grant')"><AdjustmentsHorizontalIcon class="w-8 mr-2" />点数分配</button>
     </div>
   </div>
 </template>
