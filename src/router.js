@@ -4,6 +4,7 @@ const index = {
   '/home': () => import('./views/Home.vue'),
   '/login': () => import('./views/Login.vue'),
   '/grant': () => import('./views/Grant.vue'),
+  '/donate': () => import('./views/Donate.vue'),
   '/scan': () => import('./views/Scan.vue'),
   '/chat': () => import('./views/Chat.vue'),
   '/code-check': () => import('./views/CodeCheck.vue'),

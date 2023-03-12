@@ -38,7 +38,7 @@ async function analyze () {
     <button class="absolute right-4 top-4 flex items-center" @click="lang = lang ? '' : 'cn'"><LanguageIcon class="w-5 mr-2" />{{ lang ? '中文' : 'English' }}</button>
     <h1 class="font-bold text-3xl sm:text-5xl my-4">{{ lang ? '代码检查' : 'Code Check' }}</h1>
     <p class="mb-4">{{ lang ? '请将代码粘贴在下面的框中' : 'Please paste your code in the box below' }}</p>
-    <pre ref="input" @input="checkReady" contenteditable class="font-mono bg-white text-black opacity-80 p-2 sm:p-4 w-full text-sm block my-6 min-h-[50vh] overflow-auto"></pre>
+    <pre ref="input" @input="checkReady" contenteditable class="font-mono bg-white text-black opacity-80 p-2 sm:p-4 w-full text-sm block my-6 min-h-[30vh] overflow-auto"></pre>
     <button @click="analyze" v-if="!html" class="rounded-full p-3 absolute right-6 bottom-6 shadow-md all-transition hover:shadow-lg" :class="loading ? 'bg-yellow-500' : (ready ? 'bg-blue-500' : 'bg-gray-500')"><PlayIcon class="w-10" /></button>
     <div v-if="html" class="bg-white mt-4 p-4 text-black w-full md-content break-words overflow-auto" v-html="html"></div>
     <div v-if="html" class="bg-white text-xs font-mono w-full mb-4 text-gray-500 p-1">Token: {{ tokenUsed }} used, {{ state.token }} left</div>
