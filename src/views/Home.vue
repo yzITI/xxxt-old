@@ -1,7 +1,7 @@
 <script setup>
 import srpc from '../utils/srpc.js'
 import state from '../state.js'
-import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon, QrCodeIcon, AdjustmentsHorizontalIcon } from '@heroicons/vue/24/outline'
+import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, MagnifyingGlassIcon, WrenchScrewdriverIcon, QrCodeIcon, AdjustmentsHorizontalIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -46,6 +46,7 @@ function showID () {
       <button @click="slide"><TvIcon class="w-8 mr-2" />课堂课件</button>
       <button @click="goto('/chat', true)"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
       <button @click="goto('/code-check', true)"><MagnifyingGlassIcon class="w-8 mr-2" />代码检查</button>
+      <button @click="goto('/error-check', true)"><WrenchScrewdriverIcon class="w-8 mr-2" />错误解释</button>
       <button v-if="state.token > 100e3" @click="goto('/scan')"><QrCodeIcon class="w-8 mr-2" />扫一扫</button>
       <button v-if="state.token > 100e3" @click="goto('/grant')"><AdjustmentsHorizontalIcon class="w-8 mr-2" />点数分配</button>
     </div>
