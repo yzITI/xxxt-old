@@ -41,7 +41,7 @@ async function analyze () {
     <pre ref="input" @input="checkReady" contenteditable class="font-mono bg-white text-black opacity-80 p-2 sm:p-4 w-full text-sm block my-6 min-h-[30vh] overflow-auto"></pre>
     <button @click="analyze" v-if="!html" class="rounded-full p-3 absolute right-6 bottom-6 shadow-md all-transition hover:shadow-lg" :class="loading ? 'bg-yellow-500' : (ready ? 'bg-blue-500' : 'bg-gray-500')"><PlayIcon class="w-10" /></button>
     <div v-if="html" class="bg-white mt-4 p-4 text-black w-full md-content break-words overflow-auto" v-html="html"></div>
-    <div v-if="html" class="bg-white text-xs font-mono w-full mb-4 text-gray-500 p-1">Token: {{ tokenUsed }} used, {{ state.token }} left</div>
+    <div v-if="html" class="bg-white text-xs font-mono w-full mb-4 text-gray-500 p-1">点数: 使用{{ tokenUsed }}, 剩余{{ state.token }}</div>
   </div>
 </template>
 

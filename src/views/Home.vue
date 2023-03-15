@@ -41,7 +41,7 @@ function showID () {
   <div class="w-full min-h-screen p-4 sm:p-10 bg-gray-100">
     <h1 class="font-bold text-3xl">你好，{{ state.user?.name || '' }}</h1>
     <p class="my-1 text-gray-500">欢迎来到信息学堂！您的点数剩余：<code>{{ state.token }}</code></p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 md:bg-cols-4 lg:grid-cols-5 my-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4">
       <button @click="showID"><IdentificationIcon class="w-8 mr-2" />我的ID</button>
       <button @click="slide"><TvIcon class="w-8 mr-2" />课堂课件</button>
       <button @click="goto('/chat', true)"><ChatBubbleOvalLeftEllipsisIcon class="w-8 mr-2" />AI助教</button>
