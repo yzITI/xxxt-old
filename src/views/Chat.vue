@@ -33,7 +33,7 @@ setListener(async msg => {
 </script>
 
 <template>
-  <div class="w-full h-screen relative">
+  <div class="w-full h-screen relative" style="height: 100dvh;">
     <iframe class="w-full h-full" ref="iframe" src="https://s.yzzx.org/slide/#/plugins/chat?inverse=1" />
     <Transition name="fade">
       <div v-if="loading" class="absolute w-full h-20 bg-gray-100 bottom-0 left-0 flex items-center justify-between text-sm p-4">
