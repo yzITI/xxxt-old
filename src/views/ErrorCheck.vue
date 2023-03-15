@@ -10,7 +10,7 @@ if (!state.user?.token) router.push('/')
 
 srpc('https://a.aauth.link/aichat')
 
-let input = $ref(), ready = $ref(false), loading = $ref(false), lang = $ref(''), html = $ref(''), tokenUsed = $ref(0)
+let input = $ref(), ready = $ref(false), loading = $ref(false), lang = $ref(''), html = $ref(''), pointUsed = $ref(0)
 
 function checkReady () {
   const c = input.textContent
@@ -27,9 +27,9 @@ async function analyze () {
   if (res.err) return Swal.fire('Error', res.err, 'error')
   const r = res.choices[0].message.content.trim()
   html = micromark(r)
-  tokenUsed = res.usage.total_tokens
-  state.token = res.usage.left_tokens
-  if (typeof state.token !== 'number') state.token = Infinity
+  pointUsed = res.usage
+  state.point = res.point
+  if (typeof state.point !== 'number') state.point = Infinity
 }
 </script>
 
@@ -41,7 +41,7 @@ async function analyze () {
     <pre ref="input" @input="checkReady" contenteditable class="font-mono bg-white text-black opacity-80 p-2 sm:p-4 w-full text-sm block my-6 min-h-[30vh] overflow-auto"></pre>
     <button @click="analyze" v-if="!html" class="rounded-full p-3 absolute right-6 bottom-6 shadow-md all-transition hover:shadow-lg" :class="loading ? 'bg-yellow-500' : (ready ? 'bg-blue-500' : 'bg-gray-500')"><PlayIcon class="w-10" /></button>
     <div v-if="html" class="bg-white mt-4 p-4 text-black w-full md-content break-words overflow-auto" v-html="html"></div>
-    <div v-if="html" class="bg-white text-xs font-mono w-full mb-4 text-gray-500 p-1">点数: 使用{{ tokenUsed }}, 剩余{{ state.token }}</div>
+    <div v-if="html" class="bg-white text-xs font-mono w-full mb-4 text-gray-500 p-1">点数: 使用{{ pointUsed }}, 剩余{{ state.point }}</div>
   </div>
 </template>
 

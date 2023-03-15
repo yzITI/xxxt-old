@@ -26,8 +26,8 @@ setListener(async msg => {
     m.content = m.content.trim()
     msgs.push(m)
     sendIn({ message: m.content }, iframe)
-    state.token = res.usage.left_tokens
-    if (typeof state.token !== 'number') state.token = Infinity
+    state.point = res.point
+    if (typeof state.point !== 'number') state.point = Infinity
   }
 })
 </script>
@@ -38,7 +38,7 @@ setListener(async msg => {
     <Transition name="fade">
       <div v-if="loading" class="absolute w-full h-20 bg-gray-100 bottom-0 left-0 flex items-center justify-between text-sm p-4">
         <div>正在响应，请稍等......</div>
-        <div v-if="state.token" class="font-mono">点数剩余：{{ state.token }}</div>
+        <div v-if="state.point" class="font-mono">点数剩余：{{ state.point }}</div>
       </div>
     </Transition>
   </div>

@@ -14,11 +14,11 @@ let cot = $computed(() => users.match(/\S/) ? users.trim().split('\n').length : 
 
 async function submit () {
   const us = users.trim().split('\n').map(x => x.trim())
-  if (us.length * value > state.token) return Swal.fire('剩余点数不足', '', 'error')
+  if (us.length * value > state.point) return Swal.fire('剩余点数不足', '', 'error')
   loading = true
   await srpc.grant(state.user?.token, us, value)
   loading = false
-  state.token = state.token - us.length * value
+  state.point = state.point - us.length * value
   return Swal.fire('成功', '', 'success')
 }
 
@@ -34,7 +34,7 @@ async function del () {
 <template>
   <div class="w-full min-h-screen p-4 sm:p-10 bg-gray-100 flex flex-col">
     <h1 class="text-3xl font-bold my-2">点数分配</h1>
-    <p>您的点数剩余：<code>{{ state.token }}</code></p>
+    <p>您的点数剩余：<code>{{ state.point }}</code></p>
     <label class="block my-2">分配点数数值: <input type="number" class="border px-2 py-1 font-mono" v-model="value"></label>
     <label class="block mt-2">用户id:</label>
     <textarea class="block w-full p-2 my-1" placeholder="一行一个用户id" rows="10" v-model="users"></textarea>
