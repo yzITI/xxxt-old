@@ -7,6 +7,7 @@ const index = {
   '/donate': () => import('./views/Donate.vue'),
   '/scan': () => import('./views/Scan.vue'),
   '/chat': () => import('./views/Chat.vue'),
+  '/question': () => import('./views/Question.vue'),
   '/code-check': () => import('./views/CodeCheck.vue'),
   '/error-check': () => import('./views/ErrorCheck.vue'),
   '/:any(.*)*': () => import('./views/Cover.vue')
