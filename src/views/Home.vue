@@ -1,6 +1,6 @@
 <script setup>
 import srpc from '../utils/srpc.js'
-import state from '../state.js'
+import { state, LS } from '../state.js'
 import { IdentificationIcon, TvIcon, ChatBubbleOvalLeftEllipsisIcon, CodeBracketIcon, WrenchScrewdriverIcon, CurrencyYenIcon, QrCodeIcon, AdjustmentsHorizontalIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -49,8 +49,8 @@ function showID () {
       <button @click="goto('/code-check', true)"><CodeBracketIcon class="w-8 mr-2" />代码检查</button>
       <button @click="goto('/error-check', true)"><WrenchScrewdriverIcon class="w-8 mr-2" />错误解释</button>
       <button @click="goto('/donate')"><CurrencyYenIcon class="w-8 mr-2" />支持一下</button>
-      <button v-if="state.point > 100e3" @click="goto('/scan')"><QrCodeIcon class="w-8 mr-2" />扫一扫</button>
-      <button v-if="state.point > 100e3" @click="goto('/grant')"><AdjustmentsHorizontalIcon class="w-8 mr-2" />点数分配</button>
+      <button v-if="LS.developer" @click="goto('/scan')"><QrCodeIcon class="w-8 mr-2" />扫一扫</button>
+      <button v-if="LS.developer" @click="goto('/grant')"><AdjustmentsHorizontalIcon class="w-8 mr-2" />点数分配</button>
     </div>
   </div>
 </template>
